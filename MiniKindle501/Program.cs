@@ -5,7 +5,6 @@ namespace MiniKindle501
     public delegate void UpdateDel(bool b);
     public delegate void BkMkDel(int page, bool add);
     public delegate void SwapBookDel(int bookIndex);
-    public delegate void DeleteBookmarkDel(int bookmarkIndex);
 
     internal static class Program
     {
@@ -82,7 +81,7 @@ namespace MiniKindle501
             FlipDel flipDelegate = new FlipDel(controller.FlipPage);
             BkMkDel bookmarkDelegate = new BkMkDel(controller.AddRemBkMk);
             SwapBookDel swapBookDelegate = new SwapBookDel(controller.SwapBook);
-            DeleteBookmarkDel deleteBookmarkDelegate = new DeleteBookmarkDel(controller.DeleteBookmark);
+            
 
             // Create view with all delegates
             var view = new MiniKindleView(

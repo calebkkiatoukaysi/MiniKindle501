@@ -58,16 +58,6 @@ namespace MiniKindle501
             }
         }
 
-        public void DeleteBookmark(int bookmarkIndex)
-        {
-            if (model?.currBook?.bookmarks != null && 
-                bookmarkIndex >= 0 && 
-                bookmarkIndex < model.currBook.bookmarks.Count)
-            {
-                model.currBook.bookmarks.RemoveAt(bookmarkIndex);
-                bkmkCount = model.currBook.bookmarks.Count;
-                refresh?.Invoke(true); // Notify view to update
-            }
-        }
+        
     }
 }
