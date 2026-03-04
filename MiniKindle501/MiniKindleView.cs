@@ -1,3 +1,5 @@
+using System.Numerics;
+
 namespace MiniKindle501
 {
     public partial class MiniKindleView : Form
@@ -6,15 +8,13 @@ namespace MiniKindle501
         public FlipDel flip { get; set; }
         public BkMkDel bkmk { get; set; }
         public SwapBookDel swapBook { get; set; }
-        public DeleteBookmarkDel deleteBookmark { get; set; }
 
-        public MiniKindleView(FlipDel fl, BkMkDel mk, Model m, SwapBookDel sb, DeleteBookmarkDel db)
+        public MiniKindleView(FlipDel fl, BkMkDel mk, Model m, SwapBookDel sb)
         {
             InitializeComponent();
             flip = fl;
             bkmk = mk;
             swapBook = sb;
-            deleteBookmark = db;
             model = m;
             SetupEventHandlers();
             PopulateBookSelector();
@@ -73,13 +73,9 @@ namespace MiniKindle501
                 int currentPage = model.currBook.currentPage;
                 bool isBookmarked = model.currBook.bookmarks.Contains(currentPage);
                 
-                if (isBookmarked)
+                if (!isBookmarked)
                 {
-                    bkmk.Invoke(currentPage, false); // Remove bookmark
-                }
-                else
-                {
-                    bkmk.Invoke(currentPage, true); // Add bookmark
+                    bkmk.Invoke(currentPage, true); // Remove bookmark
                 }
             }
         }
@@ -94,9 +90,15 @@ namespace MiniKindle501
 
         private void OnDeleteBookmarkPress(object sender, EventArgs e)
         {
-            if (deleteBookmark != null && bookmarksListBox.SelectedIndex >= 0)
+            if (bookmarksListBox.SelectedIndex >= 0)
             {
-                deleteBookmark.Invoke(bookmarksListBox.SelectedIndex);
+                string? text = bookmarksListBox.Items[bookmarksListBox.SelectedIndex].ToString();
+                string[] parts = text.Split(' ');
+                int bookmarkPage = Convert.ToInt32(parts[1]) - 1;
+                if (bkmk != null)
+                {
+                    bkmk.Invoke(bookmarkPage, false); // Remove bookmark
+                }
             }
         }
 

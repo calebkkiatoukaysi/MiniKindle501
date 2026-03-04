@@ -55,8 +55,22 @@ namespace MiniKindle501
                 }
             };
 
+            var book4 = new Book
+            {
+                author = "Barak Snir",
+                pages = new List<string>
+                {
+                    "Test page 1 with random words lorem ipsum sitar amat",
+                    "Test page 2 with random words dawpihfa0ihnbfboibhfpffu fbnviuabnvuiapbviupbarviupb bvpiuaebrviupbaeriuvbiaebrvuijbapefriuv",
+                    "Test page 3 with random words dawddjjhdaobhfbaowfcb  jnjhfhnfhnfhfehhfhewofhfuoefoubfouwbet",
+                    "Test page 4 with random words qweqweqeqweqewqeqw rqwrqwrqwrqwrqwrqwfsf sfasfasfdasfdsaf",
+                    "Test page 5 with random words cxvxcvcxvxvxcvnxc,vn,xc nv,mxcnv,mxcnvkjbvkjhbskjbvkjhxcbxivbsioud",
+                    "Test page 6 with random words popopopo opo[poj pojop kjpoj pojp ojpo jpoj poj pojpo jpojpojpijpokj poij po"
+                }
+            };
+
             // Create library with sample books
-            var library = new Library(new List<Book> { book1, book2, book3 });
+            var library = new Library(new List<Book> { book1, book2, book3, book4 });
 
             // Create model with library and current book
             var model = new Model(library, book1);
@@ -75,8 +89,7 @@ namespace MiniKindle501
                 flipDelegate,
                 bookmarkDelegate,
                 model,
-                swapBookDelegate,
-                deleteBookmarkDelegate
+                swapBookDelegate
             );
 
             // Register view's Update method with controller
